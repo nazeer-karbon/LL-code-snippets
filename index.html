@@ -1,26 +1,367 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>My Code Snippets</title>
-  <style>
-    body { font-family: monospace; max-width: 900px; margin: 0 auto; padding: 20px; }
-    .snippet { background: #f5f5f5; border-left: 4px solid #0066cc; 
-               padding: 15px; margin: 15px 0; }
-    h1 { color: #333; }
-    pre { overflow-x: auto; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Snippets - Local BE App Setup</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #1e1e2e 0%, #2d2d44 100%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: #fff;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .subtitle {
+            color: #888;
+            font-size: 0.95em;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #444;
+        }
+
+        .snippet-group {
+            margin-bottom: 40px;
+        }
+
+        .snippet {
+            background: #252535;
+            border-left: 4px solid #0066cc;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            transition: all 0.3s ease;
+        }
+
+        .snippet:hover {
+            background: #2a2a3a;
+            box-shadow: 0 4px 15px rgba(0, 102, 204, 0.2);
+        }
+
+        .snippet-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .snippet-title .emoji {
+            font-size: 1.3em;
+        }
+
+        .code-wrapper {
+            position: relative;
+            background: #1e1e2e;
+            border-radius: 6px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        pre {
+            margin: 0;
+            padding: 15px;
+            overflow-x: auto;
+        }
+
+        code {
+            font-family: 'Courier New', monospace;
+            font-size: 0.95em;
+            line-height: 1.4;
+            color: #e0e0e0;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #0066cc;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .copy-btn:hover {
+            background: #0052a3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 102, 204, 0.3);
+        }
+
+        .copy-btn.copied {
+            background: #28a745;
+        }
+
+        .tip {
+            background: rgba(255, 193, 7, 0.1);
+            border-left: 4px solid #ffc107;
+            padding: 12px 15px;
+            margin-top: 12px;
+            border-radius: 4px;
+            font-size: 0.95em;
+            color: #fff;
+        }
+
+        .tip strong {
+            color: #ffc107;
+        }
+
+        .tip code {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+
+        .directory-path {
+            background: rgba(100, 200, 255, 0.1);
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 25px;
+            border-left: 4px solid #64c8ff;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95em;
+            word-break: break-all;
+        }
+
+        .directory-path strong {
+            color: #64c8ff;
+        }
+
+        footer {
+            text-align: center;
+            color: #666;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            font-size: 0.9em;
+        }
+
+        .step-number {
+            display: inline-block;
+            background: #0066cc;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+    </style>
 </head>
 <body>
-  <h1>Code Snippets</h1>
-  
-  <div class="snippet">
-    <h3>Bash - Get Git branch</h3>
-    <pre><code>git rev-parse --abbrev-ref HEAD</code></pre>
-  </div>
-  
-  <div class="snippet">
-    <h3>Python - Quick HTTP Server</h3>
-    <pre><code>python3 -m http.server 8000</code></pre>
-  </div>
+    <div class="container">
+        <h1>📝 Code Snippets</h1>
+        <div class="subtitle">Local BE App Setup - All commands prefixed with working directory</div>
+
+        <div class="directory-path">
+            <strong>📁 Working Directory:</strong> C:\Dev\BalancedLabs\DeploymentUtilities\Snipets\
+        </div>
+
+        <div class="snippet-group">
+            <div class="snippet">
+                <div class="snippet-title">
+                    <span class="emoji">🧹</span>
+                    <span>Step 1 — Stop IIS</span>
+                </div>
+                <div class="code-wrapper">
+                    <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                    <pre><code>IISRESET /stop</code></pre>
+                </div>
+            </div>
+
+            <div class="snippet">
+                <div class="snippet-title">
+                    <span class="emoji">🗑️</span>
+                    <span>Step 2 — Clean Solutions (optional)</span>
+                </div>
+                <div class="code-wrapper">
+                    <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                    <pre><code>C:\Dev\BalancedLabs\DeploymentUtilities\Snipets\Clean-KarbonApplication.ps1</code></pre>
+                </div>
+                <div class="tip">
+                    <strong>💡 Tip:</strong> Cleans all solution <code>bin</code> folders. Not always required, but helps resolve stubborn build issues.
+                </div>
+            </div>
+
+            <div class="snippet">
+                <div class="snippet-title">
+                    <span class="emoji">🗄️</span>
+                    <span>Step 3 — Publish Database Externals (optional)</span>
+                </div>
+                <div class="code-wrapper">
+                    <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                    <pre><code>C:\Dev\BalancedLabs\DeploymentUtilities\Snipets\Build-KarbonBuildAndPublishDatabaseExternals.ps1</code></pre>
+                </div>
+                <div class="tip">
+                    <strong>💡 Tip:</strong> Publishes shared DB dependencies (externals). Good to run if you haven't done so in a while, or if DB publish is failing.
+                </div>
+            </div>
+
+            <div class="snippet">
+                <div class="snippet-title">
+                    <span class="emoji">🗄️</span>
+                    <span>Step 4 — Publish All Databases (required)</span>
+                </div>
+                <div class="code-wrapper">
+                    <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                    <pre><code>C:\Dev\BalancedLabs\DeploymentUtilities\Snipets\Build-KarbonBuildAndPublishDatabases.ps1</code></pre>
+                </div>
+                <div class="tip">
+                    <strong>💡 Tip:</strong> Publishes all Karbon pillar databases. This is usually the step with the most issues.
+                </div>
+                <div class="tip">
+                    <strong>💡 Manual Fix:</strong> If a specific pillar DB fails, open its <code>.sln</code> in Visual Studio as admin, right-click the DB project → Publish, and set:<br><br>
+                    • Server Name: <code>.</code><br>
+                    • Database: <code>&lt;PillarName&gt;</code> (e.g. <code>Tenant</code>, <code>Work</code>)<br>
+                    • Trust Server Certificate: <code>True</code><br><br>
+                    Then re-run the script.
+                </div>
+                <div class="tip">
+                    <strong>💡 Fast Alternative:</strong> If you only need a quick DB sync after merging develop:
+                    <div class="code-wrapper" style="margin-top: 8px;">
+                        <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                        <pre><code>C:\Dev\BalancedLabs\DeploymentUtilities\Snipets\Build-KarbonBuildAndPublishDatabasesFast.ps1</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="snippet">
+                <div class="snippet-title">
+                    <span class="emoji">🏗️</span>
+                    <span>Step 5 — Build & Publish All Pillars (required)</span>
+                </div>
+                <div class="code-wrapper">
+                    <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                    <pre><code>C:\Dev\BalancedLabs\DeploymentUtilities\Snipets\Build-KarbonPillarsNoDatabases.ps1</code></pre>
+                </div>
+                <div class="tip">
+                    <strong>💡 Faster Alternatives (compile-check only, no publish):</strong><br><br>
+                    Compile only (with package restore):
+                    <div class="code-wrapper" style="margin-top: 8px;">
+                        <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                        <pre><code>C:\Dev\BalancedLabs\DeploymentUtilities\Snipets\Build-KarbonPillarsNoDatabases.NoPublish.ps1</code></pre>
+                    </div>
+                    Fastest compile (no restore, no publish):
+                    <div class="code-wrapper" style="margin-top: 8px;">
+                        <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                        <pre><code>C:\Dev\BalancedLabs\DeploymentUtilities\Snipets\Build-KarbonPillarsNoDatabases.NoRestore.NoPublish.ps1</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="snippet">
+                <div class="snippet-title">
+                    <span class="emoji">⚙️</span>
+                    <span>Step 6 — Configure IIS (first-time setup only)</span>
+                </div>
+                <div class="code-wrapper">
+                    <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                    <pre><code>C:\Dev\BalancedLabs\DeploymentUtilities\Snipets\Configure-KarbonIIS.ps1</code></pre>
+                </div>
+                <div class="tip">
+                    <strong>💡 Tip:</strong> Only needed after a .NET 8 migration or first-time setup. Configures and populates all required IIS sites.
+                </div>
+            </div>
+
+            <div class="snippet">
+                <div class="snippet-title">
+                    <span class="emoji">🌐</span>
+                    <span>Step 7 — Deploy Frontend (required)</span>
+                </div>
+                <div class="code-wrapper">
+                    <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                    <pre><code>C:\Dev\BalancedLabs\DeploymentUtilities\Snipets\Deploy-KarbonDownloadCompiledFE.ps1</code></pre>
+                </div>
+            </div>
+
+            <div class="snippet">
+                <div class="snippet-title">
+                    <span class="emoji">🔄</span>
+                    <span>Step 8 — Start IIS</span>
+                </div>
+                <div class="code-wrapper">
+                    <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                    <pre><code>IISRESET</code></pre>
+                </div>
+            </div>
+
+            <div class="snippet">
+                <div class="snippet-title">
+                    <span class="emoji">🚀</span>
+                    <span>Step 9 — Start MessageManager (required)</span>
+                </div>
+                <p style="margin: 10px 0; font-size: 0.95em; color: #aaa;">Option 1: Full path</p>
+                <div class="code-wrapper">
+                    <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                    <pre><code>C:\Dev\BalancedLabs\Application\System\MessageManager.Control\bin\Debug\net8.0\BalancedLabs.MessageManager.Control.exe start</code></pre>
+                </div>
+                <p style="margin: 15px 0 10px 0; font-size: 0.95em; color: #aaa;">Option 2: Using dotnet (run from anywhere)</p>
+                <div class="code-wrapper">
+                    <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                    <pre><code>dotnet run --project $env:KARBON_APP_DIR/System/MessageManager.Control --no-launch-profile --no-restore --no-build start</code></pre>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>✨ Local BE App Setup Snippets — Last updated July 2026</p>
+        </footer>
+    </div>
+
+    <script>
+        function copyToClipboard(button) {
+            const codeElement = button.nextElementSibling.querySelector('code');
+            const text = codeElement.textContent;
+
+            navigator.clipboard.writeText(text).then(() => {
+                const originalText = button.textContent;
+                button.textContent = '✓ Copied!';
+                button.classList.add('copied');
+
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.classList.remove('copied');
+                }, 2000);
+            }).catch(() => {
+                alert('Failed to copy. Please try again.');
+            });
+        }
+
+        // Highlight code blocks
+        document.querySelectorAll('code').forEach(block => {
+            hljs.highlightElement(block);
+        });
+    </script>
 </body>
 </html>
