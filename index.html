@@ -281,7 +281,7 @@
                 </div>
                 <div class="code-wrapper">
                     <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
-                    <pre><code>redis-cli eval "for _,k in ipairs(redis.call('keys','*Traits*')) do redis.call('del',k) end" 0</code></pre>
+                    <pre><code>wsl redis-cli eval "for _,k in ipairs(redis.call('keys','Traits')) do redis.call('del',k) end" 0</code></pre>
                 </div>
             </div>
         </div>
