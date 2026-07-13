@@ -105,6 +105,58 @@
         <div>
             <div class="snippet">
                 <div class="snippet-title">
+                    <span class="emoji">📂</span>
+                    <span>Initial Setup — Git Checkout & Pull</span>
+                </div>
+                <div class="code-wrapper">
+                    <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                    <pre><code>cd C:\Dev\BalancedLabs\Application</code></pre>
+                </div>
+                <div class="code-wrapper" style="margin-top: 8px;">
+                    <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                    <pre><code>git checkout develop</code></pre>
+                </div>
+                <div class="code-wrapper" style="margin-top: 8px;">
+                    <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                    <pre><code>git pull origin</code></pre>
+                </div>
+            </div>
+
+            <div class="snippet">
+                <div class="snippet-title">
+                    <span class="emoji">🎨</span>
+                    <span>Lint Fix — Before Committing (Unstaged Changes)</span>
+                </div>
+                <div class="code-wrapper">
+                    <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                    <pre><code>git diff --name-only | ForEach-Object { dotnet csharpier format $_ }</code></pre>
+                </div>
+            </div>
+
+            <div class="snippet">
+                <div class="snippet-title">
+                    <span class="emoji">🎨</span>
+                    <span>Lint Fix — After Committing (Whole Branch)</span>
+                </div>
+                <div class="code-wrapper">
+                    <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                    <pre><code>git diff --name-only develop... | ForEach-Object { dotnet csharpier format $_ }</code></pre>
+                </div>
+            </div>
+
+            <div class="snippet">
+                <div class="snippet-title">
+                    <span class="emoji">🔄</span>
+                    <span>Refresh Flagsmith Cache in Redis</span>
+                </div>
+                <div class="code-wrapper">
+                    <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                    <pre><code>redis-cli eval "for _,k in ipairs(redis.call('keys','*Traits*')) do redis.call('del',k) end" 0</code></pre>
+                </div>
+            </div>
+
+            <div class="snippet">
+                <div class="snippet-title">
                     <span class="emoji">🧹</span>
                     <span>Step 1 — Stop IIS</span>
                 </div>
