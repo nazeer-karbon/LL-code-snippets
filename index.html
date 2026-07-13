@@ -29,6 +29,13 @@
             color: #222;
         }
 
+        .section-title {
+            font-size: 1.3em;
+            margin: 30px 0 15px 0;
+            color: #0066cc;
+            font-weight: 600;
+        }
+
         .snippet {
             background: white;
             border-left: 3px solid #0066cc;
@@ -119,39 +126,6 @@
                 <div class="code-wrapper" style="margin-top: 8px;">
                     <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
                     <pre><code>git pull origin</code></pre>
-                </div>
-            </div>
-
-            <div class="snippet">
-                <div class="snippet-title">
-                    <span class="emoji">🎨</span>
-                    <span>Lint Fix — Before Committing (Unstaged Changes)</span>
-                </div>
-                <div class="code-wrapper">
-                    <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
-                    <pre><code>git diff --name-only | ForEach-Object { dotnet csharpier format $_ }</code></pre>
-                </div>
-            </div>
-
-            <div class="snippet">
-                <div class="snippet-title">
-                    <span class="emoji">🎨</span>
-                    <span>Lint Fix — After Committing (Whole Branch)</span>
-                </div>
-                <div class="code-wrapper">
-                    <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
-                    <pre><code>git diff --name-only develop... | ForEach-Object { dotnet csharpier format $_ }</code></pre>
-                </div>
-            </div>
-
-            <div class="snippet">
-                <div class="snippet-title">
-                    <span class="emoji">🔄</span>
-                    <span>Refresh Flagsmith Cache in Redis</span>
-                </div>
-                <div class="code-wrapper">
-                    <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
-                    <pre><code>redis-cli eval "for _,k in ipairs(redis.call('keys','*Traits*')) do redis.call('del',k) end" 0</code></pre>
                 </div>
             </div>
 
@@ -276,14 +250,38 @@
                 </div>
             </div>
 
+            <h2 class="section-title">💻 Coding and Debugging</h2>
+
             <div class="snippet">
                 <div class="snippet-title">
-                    <span class="emoji">🚀</span>
-                    <span>Step 9b — Start MessageManager (using dotnet)</span>
+                    <span class="emoji">🎨</span>
+                    <span>Lint Fix — Before Committing (Unstaged Changes)</span>
                 </div>
                 <div class="code-wrapper">
                     <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
-                    <pre><code>dotnet run --project $env:KARBON_APP_DIR/System/MessageManager.Control --no-launch-profile --no-restore --no-build start</code></pre>
+                    <pre><code>git diff --name-only | ForEach-Object { dotnet csharpier format $_ }</code></pre>
+                </div>
+            </div>
+
+            <div class="snippet">
+                <div class="snippet-title">
+                    <span class="emoji">🎨</span>
+                    <span>Lint Fix — After Committing (Whole Branch)</span>
+                </div>
+                <div class="code-wrapper">
+                    <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                    <pre><code>git diff --name-only develop... | ForEach-Object { dotnet csharpier format $_ }</code></pre>
+                </div>
+            </div>
+
+            <div class="snippet">
+                <div class="snippet-title">
+                    <span class="emoji">🔄</span>
+                    <span>Refresh Flagsmith Cache in Redis</span>
+                </div>
+                <div class="code-wrapper">
+                    <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                    <pre><code>redis-cli eval "for _,k in ipairs(redis.call('keys','*Traits*')) do redis.call('del',k) end" 0</code></pre>
                 </div>
             </div>
         </div>
