@@ -284,6 +284,41 @@
                     <pre><code>wsl redis-cli eval "for _,k in ipairs(redis.call('keys','Traits')) do redis.call('del',k) end" 0</code></pre>
                 </div>
             </div>
+
+            <h2 class="section-title">🖥️ Run FE commands</h2>
+
+            <div class="snippet">
+                <div class="snippet-title">
+                    <span class="emoji">🏠</span>
+                    <span>local</span>
+                </div>
+                <div class="code-wrapper">
+                    <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                    <pre><code>npm run start-local:wsl</code></pre>
+                </div>
+            </div>
+
+            <div class="snippet">
+                <div class="snippet-title">
+                    <span class="emoji">🧪</span>
+                    <span>dev2</span>
+                </div>
+                <div class="code-wrapper">
+                    <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                    <pre><code>npm run start-dev:wsl</code></pre>
+                </div>
+            </div>
+
+            <div class="snippet">
+                <div class="snippet-title">
+                    <span class="emoji">🎭</span>
+                    <span>stage2</span>
+                </div>
+                <div class="code-wrapper">
+                    <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                    <pre><code>npm run start-stage:wsl</code></pre>
+                </div>
+            </div>
         </div>
     </div>
 
